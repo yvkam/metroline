@@ -1,0 +1,11 @@
+type Query {
+    metroline: Metroline
+}
+
+type  Metroline {
+    stations: [Station]
+}
+
+type  Station {
+    id: String
+}
