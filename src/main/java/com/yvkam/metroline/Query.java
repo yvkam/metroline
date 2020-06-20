@@ -1,18 +1,28 @@
 package com.yvkam.metroline;
 
+import com.yvkam.metroline.bam.BamClient;
+import com.yvkam.metroline.bam.BamTimeline;
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static java.util.List.of;
+import java.util.List;
 
-@Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class Query implements GraphQLQueryResolver {
 
-    public Metroline metroline() {
-        return new Metroline(of(new Station("1")));
+    private final CryptoClient cryptoClient;
+    private final BamClient bamClient;
+    private final List<MetrolineBuilder> metrolineBuilders;
+
+    Metroline metroline(String token) {
+        String id = cryptoClient.decode(token);
+        BamTimeline timeline = bamClient.getTimeline(id);
+        return metrolineBuilders.stream()
+                .filter(builder -> builder.supportedType(timeline.getType()))
+                .findFirst()
+                .map(builder -> builder.build(timeline))
+                .orElseThrow(() -> new RuntimeException("Unsupported timeline type"));
     }
 }

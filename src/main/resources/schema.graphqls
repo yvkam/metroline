@@ -1,5 +1,5 @@
 type Query {
-    metroline: Metroline
+    metroline(token: ID!): Metroline
 }
 
 type  Metroline {
@@ -8,4 +8,16 @@ type  Metroline {
 
 type  Station {
     id: String
+    content: StationContent
 }
+
+union StationContent = OrderCreationContent | RequestCreationContent
+
+type OrderCreationContent {
+    orderId: String
+}
+
+type RequestCreationContent {
+    requestId: String
+}
+

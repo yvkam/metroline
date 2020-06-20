@@ -1,12 +1,12 @@
 spring:
   application:
-    name: graphql-todo-app
+    name: metroline
   servlet:
     multipart:
       enabled: true
       location: /tmp
 server:
-  port: 9000
+  port: 8080
 management:
   endpoints:
     web:
