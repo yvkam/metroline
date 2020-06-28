@@ -4,20 +4,77 @@ type Query {
 
 type  Metroline {
     stations: [Station]
+    terminal: Terminal
+}
+
+union Terminal = SupportTerminal | SwapTermial
+
+type SwapTermial {
+    creationDate: DateTime
+}
+
+type SupportTerminal {
+    creationDate: DateTime
+    type: RequestType
+}
+
+enum RequestType {
+    ADMIN, TECHNICAL
 }
 
 type  Station {
     id: String
+    date: DateTime
+    state: State
+    focus: Boolean
     content: StationContent
 }
 
-union StationContent = OrderCreationContent | RequestCreationContent
+enum State {
+    SOON, DONE, ERROR
+}
 
-type OrderCreationContent {
+scalar DateTime
+
+union StationContent = SwapCreationContent | SupportCreationContent | Treatment | Solution | Feedback
+
+type Feedback {
+    status: FeedbackStatus!
+    comment: Comment
+}
+
+type Comment {
+    date: DateTime
+    value: String
+}
+
+enum FeedbackStatus {
+    ACCEPTED, AUTO_ACCEPTED, REJECTED, WAITING
+}
+
+type Solution {
+    solutionCode: String
+    creditNoteAmount: String
+    creditNoteId: String
+}
+
+type Treatment {
+    status: TreatmentStatus
+    repairDate: DateTime
+}
+
+enum TreatmentStatus {
+    DELAY, INWAIT
+}
+
+type SwapCreationContent {
     orderId: String
 }
 
-type RequestCreationContent {
+type SupportCreationContent {
     requestId: String
+    channel: String
+    customerPhoneNumber: String
+    customerId: String
 }
 
