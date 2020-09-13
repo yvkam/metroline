@@ -1,13 +1,10 @@
 package com.yvkam.metroline;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Getter
-@RequiredArgsConstructor
+@Data
 @AllArgsConstructor
 public class Station {
-    private final String id;
+    private String id;
     private StationContent content;
 }

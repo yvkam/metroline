@@ -2,7 +2,9 @@ package com.yvkam.metroline;
 
 import com.yvkam.metroline.bam.BamClient;
 import com.yvkam.metroline.bam.BamTimeline;
+import graphql.kickstart.servlet.context.DefaultGraphQLServletContext;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import graphql.schema.DataFetchingEnvironment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,9 @@ public class Query implements GraphQLQueryResolver {
     private final BamClient bamClient;
     private final List<MetrolineBuilder> metrolineBuilders;
 
-    Metroline metroline(String token) {
+    Metroline metroline(String token, DataFetchingEnvironment env) {
+        DefaultGraphQLServletContext context = env.getContext();
+        context.getHttpServletResponse().addHeader("test", "hello");
         String id = cryptoClient.decode(token);
         BamTimeline timeline = bamClient.getTimeline(id);
         return metrolineBuilders.stream()

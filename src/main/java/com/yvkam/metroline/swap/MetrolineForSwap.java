@@ -18,6 +18,6 @@ public class MetrolineForSwap implements MetrolineBuilder {
 
     @Override
     public Metroline build(BamTimeline bamTimeline) {
-        return new Metroline(of(new Station(bamTimeline.getId(), OrderCreationContent.builder().orderId("RMTDGXCVG").build())));
+        return new Metroline(of(new Station(bamTimeline.getId(), new OrderCreationContent("RMTDGXCVG"))));
     }
 }

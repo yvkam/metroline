@@ -2,6 +2,23 @@ type Query {
     metroline(token: ID!): Metroline
 }
 
+type Mutation {
+    addComment(comment: CommentInput): Comment
+}
+
+type Comment {
+    value: String
+    date: OffsetDateTime
+}
+
+
+input CommentInput {
+    value: String
+    date: OffsetDateTime
+}
+
+scalar OffsetDateTime
+
 type  Metroline {
     stations: [AbstractStation]
     terminal: Terminal

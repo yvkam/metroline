@@ -2,10 +2,10 @@ package com.yvkam.metroline.support;
 
 import com.yvkam.metroline.StationContent;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
 @Builder
-@Getter
+@Data
 public class RequestCreationContent implements StationContent {
-    private final String requestId;
+    private String requestId;
 }

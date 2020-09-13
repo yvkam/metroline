@@ -16,25 +16,7 @@ graphql:
   servlet:
     actuator-metrics: true
     enabled: true
-    mapping: /test
   playground:
     cdn:
       version: latest
-altair:
-  enabled: true
-  cdn:
-    enabled: false
-graphiql:
-  enabled: true
-  cdn:
-    enabled: true
-    version: 0.17.5
-voyager:
-  enabled: true
-  cdn:
-    enabled: false
-graphql.playground:
-  enabled: true
-  cdn:
-    enabled: false
 

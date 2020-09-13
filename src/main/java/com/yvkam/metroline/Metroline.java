@@ -1,12 +1,12 @@
 package com.yvkam.metroline;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Metroline {
-    public final List<Station> stations;
+    public List<Station> stations;
 }
